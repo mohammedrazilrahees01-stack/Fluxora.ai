@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #09090b;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated Background Glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59,130,246,.18), transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(168,85,247,.14), transparent 25%),
+    radial-gradient(circle at 50% 80%, rgba(34,197,94,.10), transparent 30%);
+  filter: blur(40px);
+  z-index: -2;
+}
+
+/* Soft moving layer */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.03), transparent, rgba(255,255,255,.02));
+  animation: floatWave 12s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes floatWave {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(3%, -2%, 0) rotate(4deg);
+  }
+}
+
+/* Glass utility */
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Better selection */
+::selection {
+  background: rgba(59,130,246,.45);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a35;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a48;
 }

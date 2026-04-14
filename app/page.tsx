@@ -1,65 +1,91 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [dark, setDark] = useState(true);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', dark);
+  }, [dark]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-screen overflow-hidden bg-zinc-950 text-white transition-colors duration-500">
+      {/* Animated Background */}
+      <div className="absolute inset-0 -z-10 opacity-40 blur-3xl bg-gradient-to-br from-blue-500 via-cyan-400 to-purple-600 animate-pulse" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,.18),transparent_25%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,.14),transparent_25%),radial-gradient(circle_at_50%_80%,rgba(34,197,94,.10),transparent_30%)]" />
+
+      {/* Navbar */}
+      <header className="mx-auto max-w-7xl px-6 pt-6">
+        <nav className="flex items-center justify-between rounded-3xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl shadow-2xl">
+          <h1 className="text-2xl font-bold tracking-wide">Fluxora</h1>
+
+          <div className="flex items-center gap-3">
+            <button className="rounded-2xl px-4 py-2 transition hover:bg-white/10">
+              Features
+            </button>
+
+            <button className="rounded-2xl px-4 py-2 transition hover:bg-white/10">
+              Pricing
+            </button>
+
+            <button
+              onClick={() => setDark(!dark)}
+              className="rounded-2xl border border-white/10 px-4 py-2 transition hover:bg-white/10"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {dark ? 'Dark' : 'Light'}
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Hero */}
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-20 md:grid-cols-2">
+        <div>
+          <div className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur-xl">
+            AI Developer Automation
+          </div>
+
+          <h2 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
+            Build Faster with Intelligent Workflows
+          </h2>
+
+          <p className="mt-6 max-w-xl text-lg text-zinc-300">
+            Create websites, automate tasks, generate code, and manage projects
+            in one futuristic workspace.
           </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <button className="rounded-2xl bg-blue-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:scale-105">
+              Get Started
+            </button>
+
+            <button className="rounded-2xl border border-white/10 px-6 py-3 backdrop-blur-xl transition hover:bg-white/10">
+              Live Demo
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Right Glass Panel */}
+        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-2xl shadow-2xl">
+          <div className="space-y-4">
+            <div className="rounded-2xl bg-white/10 p-4">
+              Ask Fluxora to build an ecommerce store
+            </div>
+
+            <div className="rounded-2xl bg-blue-500/90 p-4 text-white">
+              Generating premium storefront, auth, payments, dashboard...
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-2xl bg-white/5 p-5">AI Chat</div>
+              <div className="rounded-2xl bg-white/5 p-5">Projects</div>
+              <div className="rounded-2xl bg-white/5 p-5">Deploy</div>
+              <div className="rounded-2xl bg-white/5 p-5">Analytics</div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
